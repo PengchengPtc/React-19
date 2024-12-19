@@ -1,5 +1,5 @@
 import { updateName } from '@/data'
-import { FC, useActionState } from 'react'
+import { type FC, useActionState } from 'react'
 /*
 React 在 18 开始对服务器端渲染（SSR）进行了全面增强，19 则进一步改进了服务端渲染期间表单提交的处理逻辑。这包括了：
 

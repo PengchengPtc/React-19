@@ -1,4 +1,4 @@
-import { FC, useOptimistic, useRef, useState } from 'react'
+import { type FC, useOptimistic, useRef, useState } from 'react'
 
 export const Optimistic: FC = () => {
   const formRef = useRef<HTMLFormElement>(null)
@@ -22,7 +22,7 @@ export const Optimistic: FC = () => {
     ]
   )
 
-  const formAction = async (formData: FormData) => {
+  const formAction = async (formData: FormData): Promise<void> => {
     // 先更新本地状态
     addOptimisticMessage(formData.get('message') as string)
     formRef.current?.reset()
@@ -34,8 +34,8 @@ export const Optimistic: FC = () => {
       { text: sentMessage, sending: false, key: messages.length + 2 }
     ])
   }
-  const deliverMessage = async (message: string) => {
-    await new Promise((res) => setTimeout(res, 1000))
+  const deliverMessage = async (message: string): Promise<string> => {
+    await new Promise((resolve) => setTimeout(resolve, 1000))
     return message
   }
 

@@ -1,5 +1,5 @@
 import { updateName } from '@/data'
-import { FC, useActionState } from 'react'
+import { type FC, useActionState } from 'react'
 import { useFormStatus } from 'react-dom'
 
 /*
@@ -7,7 +7,7 @@ import { useFormStatus } from 'react-dom'
     只有在 <form> 内部，React 才能够将当前表单的状态注入到 useFormStatus 中。
 */
 
-const DesignButton = () => {
+const DesignButton:FC = ()=> {
   const { pending } = useFormStatus()
   return (
     <button type="submit" disabled={pending}>
