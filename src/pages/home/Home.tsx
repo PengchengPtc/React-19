@@ -5,12 +5,11 @@ import { ActionState } from './ActionState'
 import { FormStatus } from './FormStatus'
 import { Optimistic } from './Optimistic'
 import { type JSX } from 'react'
-import { TodoList } from './TodoLit'
+import { TodoList } from './TodoList'
 // import { UserCard } from './UserCard'
 // import { HeavyLeakyComponent } from './leakyCounter'
 
 export default function Home(): JSX.Element {
-  console.log('hhh')
 
   return (
     <HomeWrap>

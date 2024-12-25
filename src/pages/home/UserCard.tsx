@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 
 export const UserCard: React.FC= () => {
   const [score, setScore] = useState<number>(0)
+  console.log('UserCard');
+  
   
   // 问题：这里会导致无限更新
   useEffect(() => {

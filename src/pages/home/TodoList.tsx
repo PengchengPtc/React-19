@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
 interface Todo {
   id: number
@@ -9,11 +9,11 @@ interface Todo {
 export const TodoList: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([])
   const [newTodo, setNewTodo] = useState('')
-  let idCounter = 0  // 问题：使用局部变量作为 id 计数器
+  const idCounterRef = useRef(0)  // 使用 useRef 保持计数器在重渲染之间的值
 
-  const addTodo = (): void => {
+  const addTodo = ():void=> {
     const todo: Todo = {
-      id: idCounter++,  // 每次组件重新渲染时 idCounter 都会重置为 0
+      id: idCounterRef.current++,
       title: newTodo,
       completed: false
     }
@@ -31,7 +31,7 @@ export const TodoList: React.FC = () => {
         placeholder="输入新的待办事项"
       />
       <button onClick={addTodo}>添加</button>
-
+      <div>数量：{idCounterRef.current}</div>
       <ul>
         {todos.map((todo) => (
           <li key={todo.id}>{todo.title}</li>
