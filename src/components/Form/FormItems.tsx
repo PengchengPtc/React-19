@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import React from 'react'
+import React, { type JSX } from 'react'
 import {
   type FormItemProps,
   Input,

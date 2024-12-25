@@ -6,6 +6,7 @@ import { swrFetcher } from './utils/request'
 import { theme } from './theme'
 import { type RouteObject, useRoutes, BrowserRouter } from 'react-router-dom'
 import { WebRoutes } from './routes/Routes'
+import { type JSX } from 'react'
 
 dayjs.locale('zh-cn')
 
