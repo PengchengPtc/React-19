@@ -24,7 +24,9 @@ module.exports = {
       {
         checksVoidReturn: false
       }
-    ]
+    ],
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn'  
   },
+  
   ignorePatterns: ['src/ApiInterface.ts']
 }
