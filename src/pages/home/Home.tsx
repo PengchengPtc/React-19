@@ -4,15 +4,20 @@ import { Transition } from './Transition'
 import { ActionState } from './ActionState'
 import { FormStatus } from './FormStatus'
 import { Optimistic } from './Optimistic'
+import { type JSX } from 'react'
+// import { HeavyLeakyComponent } from './leakyCounter'
 
 export default function Home(): JSX.Element {
+  console.log('hhh')
+
   return (
     <HomeWrap>
-      <UpdateName/>
-      <Transition/>
-      <ActionState/>
-      <FormStatus/>
-      <Optimistic/>
+      <UpdateName />
+      <Transition />
+      <ActionState />
+      <FormStatus />
+      <Optimistic />
+      {/* <HeavyLeakyComponent/> */}
     </HomeWrap>
   )
 }
