@@ -1,26 +1,37 @@
 import styled from 'styled-components'
-import { UpdateName } from './UpdateName'
-import { Transition } from './Transition'
-import { ActionState } from './ActionState'
-import { FormStatus } from './FormStatus'
-import { Optimistic } from './Optimistic'
-import { type JSX } from 'react'
-import { TodoList } from './TodoList'
+import { type JSX, Suspense } from 'react'
+import ArticleTitle from '@/components/Streaming-Render/ArticleTitle'
+import ArticleContent from '@/components/Streaming-Render/ArticleContent'
+import Comments from '@/components/Streaming-Render/Comments'
+// import { UpdateName } from '../../components/React19/UpdateName'
+// import { Transition } from '../../components/React19/Transition'
+// import { ActionState } from '../../components/React19/ActionState'
+// import { FormStatus } from '../../components/React19/FormStatus'
+// import { Optimistic } from '../../components/React19/Optimistic'
+// import { TodoList } from '../../components/React19/TodoList'
 // import { UserCard } from './UserCard'
 // import { HeavyLeakyComponent } from './leakyCounter'
 
 export default function Home(): JSX.Element {
-
   return (
     <HomeWrap>
-      <UpdateName />
+      {/* <UpdateName />
       <Transition />
       <ActionState />
       <FormStatus />
-      <Optimistic />
+      <Optimistic /> */}
       {/* <HeavyLeakyComponent/> */}
-      <TodoList />
+      {/* <TodoList /> */}
       {/* <UserCard/> */}
+      <Suspense fallback={<div>加载标题中...</div>}>
+        <ArticleTitle />
+      </Suspense>
+      <Suspense fallback={<div>加载内容中...</div>}>
+        <ArticleContent />
+      </Suspense>
+      <Suspense fallback={<div>加载评论中...</div>}>
+        <Comments />
+      </Suspense>
     </HomeWrap>
   )
 }
