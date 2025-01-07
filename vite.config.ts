@@ -8,6 +8,9 @@ import { resolve } from 'path'
 export default ({ mode }: { mode: string }): UserConfigExport => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
   return defineConfig({
+    worker: {
+      format: 'es'
+    },
     base: process.env.PUBLIC_URL ?? '/',
     plugins: [react()],
     build: {

@@ -1,8 +1,11 @@
 import styled from 'styled-components'
-import { type JSX, Suspense } from 'react'
-import ArticleTitle from '@/components/Streaming-Render/ArticleTitle'
-import ArticleContent from '@/components/Streaming-Render/ArticleContent'
-import Comments from '@/components/Streaming-Render/Comments'
+import { type JSX } from 'react'
+// import ArticleTitle from '@/components/Streaming-Render/ArticleTitle'
+// import ArticleContent from '@/components/Streaming-Render/ArticleContent'
+// import Comments from '@/components/Streaming-Render/Comments'
+import { ImageProcessor } from '@/components/upload/ImageProcessor' 
+import { ImageProcessorUnderWorker } from '@/components/upload/ImageProcessorUnderWorker'
+import { ImageProcessorUnderOneWorker } from '@/components/upload/imageProcessorUnderOneWorker'
 // import { UpdateName } from '../../components/React19/UpdateName'
 // import { Transition } from '../../components/React19/Transition'
 // import { ActionState } from '../../components/React19/ActionState'
@@ -14,7 +17,7 @@ import Comments from '@/components/Streaming-Render/Comments'
 
 export default function Home(): JSX.Element {
   return (
-    <HomeWrap>
+    <HomeWrap>  
       {/* <UpdateName />
       <Transition />
       <ActionState />
@@ -23,7 +26,7 @@ export default function Home(): JSX.Element {
       {/* <HeavyLeakyComponent/> */}
       {/* <TodoList /> */}
       {/* <UserCard/> */}
-      <Suspense fallback={<div>加载标题中...</div>}>
+      {/* <Suspense fallback={<div>加载标题中...</div>}>
         <ArticleTitle />
       </Suspense>
       <Suspense fallback={<div>加载内容中...</div>}>
@@ -31,7 +34,13 @@ export default function Home(): JSX.Element {
       </Suspense>
       <Suspense fallback={<div>加载评论中...</div>}>
         <Comments />
-      </Suspense>
+      </Suspense> */}
+      <p>不使用 Worker</p>
+      <ImageProcessor />
+      <p>使用多个 Worker</p>
+      <ImageProcessorUnderWorker />
+      <p>使用单个 Worker</p>
+      <ImageProcessorUnderOneWorker />
     </HomeWrap>
   )
 }

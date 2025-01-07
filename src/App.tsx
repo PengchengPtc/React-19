@@ -1,4 +1,4 @@
-import { ConfigProvider } from 'antd'
+import { ConfigProvider ,App as AntdApp} from 'antd'
 import locale from 'antd/es/locale/zh_CN'
 import dayjs from 'dayjs'
 import { SWRConfig } from 'swr'
@@ -31,7 +31,9 @@ function App(): JSX.Element {
         }}
       >
         <BrowserRouter basename={import.meta.env.BASE_URL}>
-          <AppRouter />
+          <AntdApp>
+            <AppRouter />
+          </AntdApp>
         </BrowserRouter>
       </ConfigProvider>
     </SWRConfig>
