@@ -13,51 +13,47 @@ export const ImageProcessorUnderOneWorker: React.FC = () => {
   
   const { message } = App.useApp()
 
-  const processImageInWorker = async (
-    imageData: ImageData,
-    onProgress?: (progress: number) => void
-  ): Promise<ImageData | undefined> => {
-    try {
-      const totalPixels = imageData.data.length
-      const updateInterval = Math.floor(totalPixels / 100) // 每1%更新一次
-      let lastUpdate = 0
+// ... existing code ...
 
-      for (let i = 0; i < totalPixels; i++) {
-        // 检查是否需要更新进度
-        if (i - lastUpdate >= updateInterval) {
-          const progress = Math.round((i / totalPixels) * 100)
-          onProgress?.(progress)
-          lastUpdate = i
-          // 强制让出主线程，确保UI能更新
-          await new Promise((resolve) => setTimeout(resolve, 0))
-        }
-      }
+const processImageInWorker = async (
+  imageData: ImageData,
+  onProgress?: (progress: number) => void
+): Promise<ImageData | undefined> => {
+  try {
+    // 移除旧的进度计算逻辑
+    return await new Promise((resolve, reject) => {
+      const worker = new Worker(new URL('./oneWorker.ts', import.meta.url))
       
-      // 确保最后显示100%
-      onProgress?.(100)
-
-      return await new Promise((resolve, reject) => {
-        const worker = new Worker(new URL('./oneWorker.ts', import.meta.url))
-        
-        worker.onmessage = (event) => {
+      worker.onmessage = (event) => {
+        // 检查是否收到进度更新消息
+        if (event.data.type === 'progress') {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+          onProgress?.(event.data.progress)
+          return
+        }
+        // 处理完成的消息
+        if (event.data.type === 'complete') {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
           imageData.data.set(event.data.imageData.data)
           worker.terminate()
           resolve(imageData)
         }
+      }
 
-        worker.onerror = (error) => {
-          worker.terminate()
-          reject(error)
-        }
+      worker.onerror = (error) => {
+        worker.terminate()
+        reject(error)
+      }
 
-        worker.postMessage({ imageData })
-      })
-    } catch (error) {
-      console.error('Image processing error:', error)
-      return undefined
-    }
+      worker.postMessage({ imageData })
+    })
+  } catch (error) {
+    console.error('Image processing error:', error)
+    return undefined
   }
+}
+
+// ... existing code ...
 
   const handleImageProcess = async (file: File): Promise<void> => {
     setLoading(true)

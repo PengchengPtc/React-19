@@ -25,6 +25,7 @@ self.onmessage = (e) => {
     }
   
     // 处理完成后发送消息回主线程
-    self.postMessage({ imageData });
+    // 发送处理完成的数据
+    self.postMessage({ type: 'complete', imageData })
   }
   
